@@ -37,26 +37,20 @@ public class SingleWaySolver implements Solver {
 			foundRoute.add(child.toString());
 			foundSequence.add(child.toString());
 			if(child.isDescendentOfMine(parent)) {
-				System.out.println(foundSequence);
-				System.out.println(foundRoute);
 				foundRoutes.add(foundRoute.toArray(new String[]{}));
 				foundSequence.add(parent.toString());
 				foundRoute.remove(foundRoute.size() - 1);
 			}else if(child.isExit()) {
 				return foundRoutes.add(foundRoute.toArray(new String[]{})) || true;
 			} else if(child.hasChildren()) {
-//				int indexSeq = foundSequence.size();
 				int indexRoute = foundRoute.size();
 				boolean result = findWay(child, child.getChildren());
 				if(result) {
 					return true;
 				}
-//				foundSequence = new ArrayList<>(foundSequence.subList(0, indexSeq - 1));
 				foundSequence.add(parent.toString());
 				foundRoute = new ArrayList<>(foundRoute.subList(0, indexRoute - 1));
 			} else {
-				System.out.println(foundSequence);
-				System.out.println(foundRoute);
 				foundRoutes.add(foundRoute.toArray(new String[]{}));
 				foundRoute.remove(foundRoute.size() - 1);
 				foundSequence.add(parent.toString());
