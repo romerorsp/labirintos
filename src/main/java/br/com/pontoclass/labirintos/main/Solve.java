@@ -22,7 +22,7 @@ public class Solve {
 			System.out.println("Passos incorretos durante a solução: ");
 			List<String[]> partial = answer.getPartialMapping();
 			for(int j = 0; j < partial.size(); j++ ) {
-				System.out.print(String.format("%d: ", j));
+				System.out.print(String.format("%d: ", j+1));
 				String[] solution = answer.getPartialMapping().get(j);
 				for(int i = 0; i < solution.length; i++) {
 					String step = solution[i];
