@@ -8,6 +8,7 @@ import br.com.pontoclass.labirintos.Maker;
 import br.com.pontoclass.labirintos.ModelType;
 import br.com.pontoclass.labirintos.solving.Answer;
 import br.com.pontoclass.labirintos.solving.SingleWaySolver;
+import br.com.pontoclass.labirintos.Route;
 
 public class Solve {
 	public static void main(String[] args) {
@@ -50,7 +51,13 @@ public class Solve {
 			}
 			System.out.println();
 			System.out.print("Possível Solução: ");
-			solution = answer.getPartialMapping().get(answer.getPartialMapping().size() - 1);
+			solution = new String[]{};
+			for(String[] possible: answer.getPartialMapping()) {
+				if(possible[possible.length-1].startsWith(Route.EXIT_OPEN)) {
+					solution = possible;
+					break;
+				}
+			}
 			for(int i = 0; i < solution.length; i++) {
 				String step = solution[i];
 				if(i+1 == solution.length) {
