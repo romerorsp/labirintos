@@ -66,13 +66,13 @@ abstract class AbstractRoute implements Route {
 	}
 	
 	@Override
-	public boolean isChildOfMine(Route route) {
+	public boolean isDescendentOfMine(Route route) {
 		return children.contains(route);		
 	};
 	
 	@SuppressWarnings("unused") private boolean deepSearchChild(Route candidate) {
 		for(Route route: children) {
-			if(route.isChildOfMine(candidate)) {
+			if(route.isDescendentOfMine(candidate)) {
 				return true;
 			}
 		}
@@ -80,13 +80,13 @@ abstract class AbstractRoute implements Route {
 	}
 
 	@Override
-	public boolean isParentOfMine(Route route) {
+	public boolean isAscendentOfMine(Route route) {
 		return parents.contains(route);
 	};
 
 	@SuppressWarnings("unused") private boolean deepSearchParent(Route candidate) {
 		for(Route route: parents) {
-			if(route.isParentOfMine(candidate)) {
+			if(route.isAscendentOfMine(candidate)) {
 				return true;
 			}
 		}

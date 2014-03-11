@@ -26,7 +26,7 @@ public class SingleWaySolver implements Solver {
 			List<? extends Route> children = route.getChildren();
 			found = findWay(route, children);
 			if(found) {
-				buildAnswer(true);
+				return buildAnswer(true);
 			}
 		}
 		return buildAnswer(false);
@@ -36,7 +36,7 @@ public class SingleWaySolver implements Solver {
 		for(Route child: children) {
 			foundRoute.add(child.toString());
 			foundSequence.add(child.toString());
-			if(child.isChildOfMine(parent)) {
+			if(child.isDescendentOfMine(parent)) {
 				System.out.println(foundSequence);
 				System.out.println(foundRoute);
 				foundRoutes.add(foundRoute.toArray(new String[]{}));
@@ -45,13 +45,14 @@ public class SingleWaySolver implements Solver {
 			}else if(child.isExit()) {
 				return foundRoutes.add(foundRoute.toArray(new String[]{})) || true;
 			} else if(child.hasChildren()) {
-				int indexSeq = foundSequence.size();
+//				int indexSeq = foundSequence.size();
 				int indexRoute = foundRoute.size();
 				boolean result = findWay(child, child.getChildren());
 				if(result) {
 					return true;
 				}
-				foundSequence = new ArrayList<>(foundSequence.subList(0, indexSeq - 1));
+//				foundSequence = new ArrayList<>(foundSequence.subList(0, indexSeq - 1));
+				foundSequence.add(parent.toString());
 				foundRoute = new ArrayList<>(foundRoute.subList(0, indexRoute - 1));
 			} else {
 				System.out.println(foundSequence);
